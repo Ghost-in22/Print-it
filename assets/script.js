@@ -23,22 +23,41 @@ let arrowRight = document.querySelector(".arrow_right");
 let containerDots = document.querySelector(".dots");
 let activeSlideIndex = 0;
 let imageCarousel = document.querySelector(".banner-img");
+let taglineCarousel = document.querySelector("#banner p");
 
 arrowLeft.addEventListener("click", () => {
   activeSlideIndex--;
   imageCarousel.src = slides[activeSlideIndex].image;
+  taglineCarousel.innerHTML = slides[activeSlideIndex].tagLine;
+  updateDots();
 });
 
 arrowRight.addEventListener("click", () => {
   activeSlideIndex++;
   imageCarousel.src = slides[activeSlideIndex].image;
+  taglineCarousel.innerHTML = slides[activeSlideIndex].tagLine;
+  updateDots();
 });
 
 for (i = 0; i < slides.length; i++) {
   let newDot = document.createElement("span");
   newDot.classList.add("dot");
-  if (i === 0) {
+
+  if (i === activeSlideIndex) {
     newDot.classList.add("dot_selected");
   }
+
   containerDots.appendChild(newDot);
+}
+
+let dots = document.querySelectorAll(".dot");
+
+function updateDots() {
+  for (i = 0; i < dots.length; i++) {
+    if (i === activeSlideIndex) {
+      dots[i].classList.add("dot_selected");
+    } else {
+      dots[i].classList.remove("dot_selected");
+    }
+  }
 }
