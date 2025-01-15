@@ -27,6 +27,9 @@ let taglineCarousel = document.querySelector("#banner p");
 
 arrowLeft.addEventListener("click", () => {
   activeSlideIndex--;
+  if (activeSlideIndex < 0) {
+    activeSlideIndex = slides.length - 1;
+  }
   imageCarousel.src = slides[activeSlideIndex].image;
   taglineCarousel.innerHTML = slides[activeSlideIndex].tagLine;
   updateDots();
@@ -34,6 +37,9 @@ arrowLeft.addEventListener("click", () => {
 
 arrowRight.addEventListener("click", () => {
   activeSlideIndex++;
+  if (activeSlideIndex >= slides.length) {
+    activeSlideIndex = 0;
+  }
   imageCarousel.src = slides[activeSlideIndex].image;
   taglineCarousel.innerHTML = slides[activeSlideIndex].tagLine;
   updateDots();
@@ -53,7 +59,7 @@ for (i = 0; i < slides.length; i++) {
 let dots = document.querySelectorAll(".dot");
 
 function updateDots() {
-  for (i = 0; i < dots.length; i++) {
+  for (let i = 0; i < dots.length; i++) {
     if (i === activeSlideIndex) {
       dots[i].classList.add("dot_selected");
     } else {
